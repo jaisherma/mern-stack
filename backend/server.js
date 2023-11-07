@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
 });
 
 httpServer.listen(port, () => {
-  console.log(`Serve at http://localhost:${port}`);
+  console.log(`Serve at http://backend:${port}`);
 });
 
 // app.listen(port, () => {
