@@ -17,17 +17,18 @@ app.use(express.urlencoded({ extended: true }));
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URL, {
+const mongoURI = 'mongodb://db:27017/amazona'; // Replace with your actual connection string
+
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
-  .then(() => {
-    console.log('Connected to MongoDB');
-    // Start your server or define your other operations here
-  })
-  .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-  });
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB!');
+});
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
