@@ -17,12 +17,19 @@ app.use(express.urlencoded({ extended: true }));
 
 const mongoose = require('mongoose');
 
+const mongoose = require('mongoose');
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
-.then(() => console.log('DB is connected'))
-.catch(err => console.error(err));
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Start your server or define your other operations here
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
