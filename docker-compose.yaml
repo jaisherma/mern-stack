@@ -15,6 +15,7 @@ services:
       - db 
     environment:
       - MONGO_URL=mongodb://db:27017/amazona
+      - MONGO_URI=mongodb://db:27017/amazona
   db:
     image: mongo
     ports:
